@@ -606,7 +606,6 @@ const App = () => {
   const [tiles, setTiles] = React.useState(initialTiles);
   const [selected, setSelected] = React.useState({ row: -1, col: -1 });
   const [selectedAction, setSelectedAction] = React.useState({});
-  const [actions, setActions] = React.useState([]);
   const [players, setPlayers] = React.useState([
     {
       name: "Bob",
