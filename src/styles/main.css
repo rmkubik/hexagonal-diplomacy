@@ -1,0 +1,65 @@
+body {
+  user-select: none;
+  margin: 0;
+}
+
+.dark {
+  fill: darkgray;
+}
+
+.light {
+  fill: gray;
+}
+
+.selected {
+  /*  fill: lightblue; */
+  fill: url(#diagonalHatch);
+}
+
+.hex {
+  display: flex;
+  /*   justify-content: center;
+    align-items: center; */
+  position: relative;
+}
+
+.hex > * {
+  /*   display: inline-block; */
+  position: absolute;
+  /*   top: 0;
+    left: 0; */
+}
+
+.hex p {
+  margin: 0;
+}
+
+.action-button {
+  border-radius: 50%;
+  font-size: 32px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+
+.action-buttons {
+  position: absolute;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.submit {
+  cursor: pointer;
+  height: fit-content;
+  margin-top: 32px;
+  margin-left: 32px;
+}
