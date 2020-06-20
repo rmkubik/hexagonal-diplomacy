@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import "../styles/main.css";
 
@@ -386,7 +386,7 @@ const Hex = ({
           xmlns="http://www.w3.org/2000/svg"
           width={TILE_WIDTH}
           height={TILE_HEIGHT}
-          viewbox="0 0 173.20508075688772 200"
+          viewBox="0 0 173.20508075688772 200"
         >
           <path
             style={{
@@ -538,13 +538,14 @@ const HexGrid = ({ tiles, selected, players, selectedAction }) => {
   );
 };
 
+const tileMapper = (char) => (char !== "." ? { icon: char } : { icon: "" });
 const initialTiles = constructMatrixFromTemplate(
-  `🏔 . 🏘 . . . 🏔
+  `🏔 . . . . . 🏔
 🏔 🏔 . . . 🏔 🏔
-. 🏘 . . . 🏔 🏔
+. . . . . 🏔 🏔
 🏔 . . . . . 🏔
-🏔 . . 🏘 . . 🏔`,
-  (char) => (char !== "." ? { icon: char } : { icon: "" })
+🏔 . . . . . 🏔`,
+  tileMapper
 );
 
 const ActionButton = ({ children, onClick }) => {
@@ -681,11 +682,6 @@ const App = () => {
   };
 
   const selectedTile = getLocation(selected, tiles);
-  console.log(
-    selectedTile,
-    getUnitByLocation(selected, players),
-    selectedAction
-  );
 
   return (
     <Input setSelected={select}>

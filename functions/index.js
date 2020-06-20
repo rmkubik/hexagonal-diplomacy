@@ -39,6 +39,5 @@ exports.readGame = functions.https.onRequest(async (req, res) => {
     player: { ...players[index], id: player.player.id },
   }));
 
-  // Send back a message that we've succesfully written the message
   res.json(game);
 });
