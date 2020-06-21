@@ -43,5 +43,5 @@ exports.readGame = functions.https.onRequest(async (req, response) => {
     player: { ...players[index], id: player.player.id },
   }));
 
-  response.json(game);
+  response.json({ data: game });
 });
