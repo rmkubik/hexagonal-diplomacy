@@ -1,6 +1,19 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import * as firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/functions";
 import "../styles/main.css";
+
+const firebaseApp = firebase.initializeApp({
+  apiKey: "AIzaSyCoqYxiG5xbPnzKu7Q0w2AULtuCJEygbBY",
+  authDomain: "hexagonal-diplomacy.firebaseapp.com",
+  databaseURL: "https://hexagonal-diplomacy.firebaseio.com",
+  projectId: "hexagonal-diplomacy",
+  storageBucket: "hexagonal-diplomacy.appspot.com",
+  messagingSenderId: "718835873556",
+  appId: "1:718835873556:web:993e2fd8f873277f577401",
+});
 
 const TILE_SCALE = 0.5;
 const TILE_HEIGHT = 200;
@@ -655,6 +668,18 @@ const App = () => {
       ],
     },
   ]);
+
+  useEffect(() => {
+    var readGame = firebase.functions().httpsCallable("readGame");
+
+    readGame()
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const dimensions = getDimensions(tiles);
 

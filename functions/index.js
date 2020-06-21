@@ -16,7 +16,9 @@ admin.initializeApp({
 
 // Take the text parameter passed to this HTTP endpoint and insert it into
 // Cloud Firestore under the path /messages/:documentId/original
-exports.readGame = functions.https.onRequest(async (req, res) => {
+exports.readGame = functions.https.onRequest(async (req, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
+
   // Grab the text parameter.
   const original = req.query.text;
   // Push the new message into Cloud Firestore using the Firebase Admin SDK.
@@ -39,5 +41,5 @@ exports.readGame = functions.https.onRequest(async (req, res) => {
     player: { ...players[index], id: player.player.id },
   }));
 
-  res.json(game);
+  response.json(game);
 });
