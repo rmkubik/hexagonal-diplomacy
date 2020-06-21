@@ -18,6 +18,8 @@ admin.initializeApp({
 // Cloud Firestore under the path /messages/:documentId/original
 exports.readGame = functions.https.onRequest(async (req, response) => {
   response.set("Access-Control-Allow-Origin", "*");
+  response.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  response.set("Access-Control-Request-Headers", "Content-Type");
 
   // Grab the text parameter.
   const original = req.query.text;
