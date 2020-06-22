@@ -553,11 +553,11 @@ const HexGrid = ({ tiles, selected, players, selectedAction }) => {
 
 const tileMapper = (char) => (char !== "." ? { icon: char } : { icon: "" });
 const initialTiles = constructMatrixFromTemplate(
-  `🏔 . . . . . 🏔
-🏔 🏔 . . . 🏔 🏔
-. . . . . 🏔 🏔
-🏔 . . . . . 🏔
-🏔 . . . . . 🏔`,
+  `. . . . . . .
+. . . . . . .
+. . . . . . .
+. . . . . . .
+. . . . . . .`,
   tileMapper
 );
 
@@ -673,8 +673,15 @@ const App = () => {
     var readGame = firebase.functions().httpsCallable("readGame");
 
     readGame()
-      .then((result) => {
-        console.log(result);
+      .then(({ data }) => {
+        const newLinedTiles = data.tiles.replace(/\\n/g, "\n");
+        const newPlayers = data.players.map((player) => ({
+          ...player,
+          units: player.units.map((unit) => ({ ...unit, action: {} })),
+        }));
+
+        setPlayers(newPlayers);
+        setTiles(constructMatrixFromTemplate(newLinedTiles, tileMapper));
       })
       .catch((error) => {
         console.log(error);
